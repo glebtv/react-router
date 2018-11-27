@@ -98,10 +98,10 @@ describe("A <NavLink>", () => {
       }).not.toThrow();
     });
 
-    it("it automatically escapes special characters in the path", () => {
+    it("it handles properly escaped special characters", () => {
       renderStrict(
         <MemoryRouter initialEntries={["/pizza (1)"]}>
-          <NavLink to="/pizza (1)">Pizza!</NavLink>
+          <NavLink to="/pizza \(1\)">Pizza!</NavLink>
         </MemoryRouter>,
         node
       );
@@ -109,7 +109,6 @@ describe("A <NavLink>", () => {
       const a = node.querySelector("a");
 
       expect(a.className).toContain("active");
-      expect(a.getAttribute("href")).toEqual("/pizza (1)");
     });
 
     it("renders child components that use withRouter", () => {
